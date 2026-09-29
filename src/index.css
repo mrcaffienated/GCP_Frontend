@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    overscroll-behavior-x: none;   /* blocks back/forward swipe */
+    overflow-x: clip;              /* hides horizontal overflow without affecting scroll */
+    touch-action: pan-y pinch-zoom; /* allow vertical scroll + pinch, block horizontal swipe */
+  }
+  body {
+    @apply bg-neutral-50 text-slate-900 font-sans antialiased;
+  }
+  .dark body {
+    @apply bg-neutral-950 text-slate-100;
+  }
+  /* Prevent iOS Safari auto-zoom on input focus — requires font-size >= 16px */
+  @media (max-width: 640px) {
+    input, select, textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .input {
+    @apply w-full border border-neutral-200 rounded-xl px-4 py-2.5 text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-gold-400 transition;
+  }
+  .dark .input {
+    @apply border-neutral-700 bg-neutral-800 text-slate-100 placeholder-neutral-500;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1;
+  }
+  .dark .label {
+    @apply text-slate-300;
+  }
+}
