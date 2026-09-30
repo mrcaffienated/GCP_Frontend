@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, NotebookPen, Plus, Trash2, Calendar, Loader2, Check, Pencil } from "lucide-react";
 import { notesApi } from "../services/api";
+import { useSwipeToDismiss } from "../hooks/useSwipeToDismiss";
 
 function useLockBodyScroll() {
   useEffect(() => {
@@ -164,6 +165,7 @@ function NoteCard({ note, onDelete, onSave, isEditing, onStartEdit, onCancelEdit
 
 export default function NotesModal({ onClose }) {
   useLockBodyScroll();
+  const { dragHandleProps, sheetProps } = useSwipeToDismiss(onClose);
 
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -247,8 +249,9 @@ export default function NotesModal({ onClose }) {
         exit={{ y: "100%", opacity: 0 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
+        {...sheetProps}
       >
-        <div className="flex justify-center pt-3 pb-1 sm:hidden shrink-0">
+        <div className="flex justify-center pt-3 pb-1 sm:hidden shrink-0 touch-none cursor-grab active:cursor-grabbing" {...dragHandleProps}>
           <div className="w-10 h-1 rounded-full bg-neutral-700" />
         </div>
         {/* Header */}

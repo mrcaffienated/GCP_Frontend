@@ -25,7 +25,6 @@ import { pawnsApi, authApi } from "../services/api";
 import EntryModal from "../components/EntryModal";
 import EntryDetailCard from "../components/EntryDetailCard";
 import PawnTable from "../components/PawnTable";
-import PurchaseSection from "../components/PurchaseSection";
 import EmployeeManagerModal from "../components/EmployeeManagerModal";
 import ReportsModal from "../components/ReportsModal";
 import NotesModal from "../components/NotesModal";
@@ -988,8 +987,7 @@ export default function DashboardPage() {
   const isBoss = role === "boss";
   const { bossPassword, setBossPassword } = useSettingsStore();
   const [pendingCount, setPendingCount] = useState(0);
-  // Which register is on screen: "pawn" (loans) or "purchase" (old-gold NOC forms)
-  const [section, setSection] = useState("pawn");
+  const [section] = useState("pawn");
   const [showMobileMore, setShowMobileMore] = useState(false);
   const mobileMoreRef = useRef(null);
 
@@ -1610,12 +1608,12 @@ export default function DashboardPage() {
       className="min-h-screen bg-neutral-50 dark:bg-neutral-950 transition-colors duration-200"
     >
       <div className="sticky top-0 z-30 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-200/60 dark:border-neutral-800/60 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between gap-2 shadow-sm">
-        <div className="relative" ref={profileRef}>
+        <div className="relative min-w-0" ref={profileRef}>
           <button
             onClick={() => setShowProfile((v) => !v)}
-            className="flex items-center gap-3 rounded-2xl px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+            className="flex items-center gap-3 rounded-2xl px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors min-w-0"
           >
-            <div className="relative w-8 h-8 bg-slate-900 rounded-xl flex items-center justify-center">
+            <div className="relative w-8 h-8 bg-slate-900 rounded-xl flex items-center justify-center shrink-0">
               <span className="text-amber-400 text-xs font-bold">G</span>
               {isBoss && pendingCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-[9px] font-bold flex items-center justify-center">
@@ -1623,9 +1621,9 @@ export default function DashboardPage() {
                 </span>
               )}
             </div>
-            <div className="text-left">
+            <div className="text-left min-w-0">
               <h1 className="text-base font-semibold text-slate-900 dark:text-white leading-none">Guptha's</h1>
-              <p className="text-xs text-slate-400 mt-0.5">{storeId}</p>
+              <p className="text-xs text-slate-400 mt-0.5 truncate max-w-[28vw] sm:max-w-none">{storeId}</p>
             </div>
           </button>
 
@@ -1721,22 +1719,6 @@ export default function DashboardPage() {
           </AnimatePresence>
         </div>
 
-        {/* Register switch: Pawn | Purchase */}
-        <div className="flex items-center gap-1 bg-neutral-800/80 border border-neutral-700 rounded-xl p-1 shrink-0">
-          {[["pawn", "Pawn"], ["purchase", "Purchase"]].map(([val, lab]) => (
-            <button
-              key={val}
-              onClick={() => setSection(val)}
-              className={`px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
-                section === val
-                  ? "bg-amber-500 text-slate-900 shadow"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {lab}
-            </button>
-          ))}
-        </div>
 
         <div className="flex gap-2 items-center shrink-0">
           {/* Desktop: show all buttons */}
@@ -1817,18 +1799,15 @@ export default function DashboardPage() {
             <motion.button
               whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
               onClick={openNewEntryModal}
-              className="flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-500 to-amber-400 text-slate-900 rounded-xl px-3 sm:px-4 py-2 text-sm font-bold hover:from-amber-400 hover:to-amber-300 transition-all shadow-lg shadow-amber-500/20 whitespace-nowrap"
+              className="flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-500 to-amber-400 text-slate-900 rounded-xl px-3 sm:px-4 py-2 text-sm font-bold hover:from-amber-400 hover:to-amber-300 transition-all shadow-lg shadow-amber-500/20 whitespace-nowrap shrink-0"
             >
               <Plus className="w-4 h-4" />
-              New Entry
+              <span className="hidden sm:inline">New Entry</span>
             </motion.button>
           )}
         </div>
       </div>
 
-      {section === "purchase" ? (
-        <PurchaseSection isBoss={isBoss} />
-      ) : (
       <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         <StatCards stats={stats} />
 
@@ -1947,7 +1926,6 @@ export default function DashboardPage() {
           )}
         </div>
       </div>
-      )}
 
       {showModal && (
         <EntryModal

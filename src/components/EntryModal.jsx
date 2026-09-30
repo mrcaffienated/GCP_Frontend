@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Pencil, User, Phone, MapPin, Package, Weight, IndianRupee, Calendar, Hash, Plus, Trash2, Loader2, Ban } from "lucide-react";
+import { useSwipeToDismiss } from "../hooks/useSwipeToDismiss";
 
 // Parse phone field — handles legacy plain string or JSON array
 export function parsePhones(phone) {
@@ -355,6 +356,8 @@ function getTheme(collateralType) {
 }
 
 export default function EntryModal({ nextSerial, defaultDate, isBoss, onClose, onSaved, onCancelBill, existingPawns = [] }) {
+  const { dragHandleProps, sheetProps } = useSwipeToDismiss(onClose);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
@@ -607,6 +610,7 @@ export default function EntryModal({ nextSerial, defaultDate, isBoss, onClose, o
           exit={{ y: "100%", opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           onClick={(e) => e.stopPropagation()}
+          {...sheetProps}
         >
           {/* Colored type indicator strip */}
           <div className={`h-1 w-full rounded-t-3xl sm:rounded-t-3xl transition-all duration-300 ${
@@ -618,7 +622,7 @@ export default function EntryModal({ nextSerial, defaultDate, isBoss, onClose, o
           }`} />
 
           {/* Mobile drag handle */}
-          <div className="flex justify-center pt-2 pb-1 sm:hidden shrink-0">
+          <div className="flex justify-center pt-2 pb-1 sm:hidden shrink-0 touch-none cursor-grab active:cursor-grabbing" {...dragHandleProps}>
             <div className="w-10 h-1 rounded-full bg-neutral-700" />
           </div>
 

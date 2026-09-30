@@ -2575,13 +2575,13 @@ export default function EntryDetailCard({ pawn, onClose, onRelease, onMarkActive
 
               ) : (
                 /* ── Active state ── */
-                <div className="flex items-start justify-evenly">
+                <div className="flex flex-wrap items-start justify-center gap-x-5 gap-y-3">
 
                   {/* Active Loan status — pulsing */}
                   <div className="flex flex-col items-center gap-2 select-none">
-                    <div className="relative w-14 h-14">
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14">
                       <span className="absolute inset-0 rounded-2xl bg-orange-500/20 animate-ping" style={{ animationDuration: "2.4s" }} />
-                      <div className="relative w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center">
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center">
                         <Clock className="w-6 h-6 text-orange-400" />
                       </div>
                     </div>
@@ -2596,7 +2596,7 @@ export default function EntryDetailCard({ pawn, onClose, onRelease, onMarkActive
                     className="flex flex-col items-center gap-2 group outline-none"
                   >
                     <motion.div
-                      className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center transition-all group-hover:bg-amber-500/20 group-hover:border-amber-400/50 group-hover:shadow-lg group-hover:shadow-amber-500/20"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center transition-all group-hover:bg-amber-500/20 group-hover:border-amber-400/50 group-hover:shadow-lg group-hover:shadow-amber-500/20"
                       whileHover={{ scale: 1.08 }}
                       transition={{ type: "spring", stiffness: 300, damping: 18 }}
                     >
@@ -2615,7 +2615,7 @@ export default function EntryDetailCard({ pawn, onClose, onRelease, onMarkActive
                     className="flex flex-col items-center gap-2 group outline-none"
                   >
                     <motion.div
-                      className="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-600/60 flex items-center justify-center transition-all group-hover:bg-violet-500/10 group-hover:border-violet-500/40 group-hover:shadow-lg group-hover:shadow-violet-500/10"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-neutral-800 border border-neutral-600/60 flex items-center justify-center transition-all group-hover:bg-violet-500/10 group-hover:border-violet-500/40 group-hover:shadow-lg group-hover:shadow-violet-500/10"
                       whileHover={{ scale: 1.08 }}
                       transition={{ type: "spring", stiffness: 300, damping: 18 }}
                     >
@@ -2632,7 +2632,7 @@ export default function EntryDetailCard({ pawn, onClose, onRelease, onMarkActive
                     className="flex flex-col items-center gap-2 group outline-none"
                   >
                     <motion.div
-                      className="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-600/60 flex items-center justify-center transition-all group-hover:bg-emerald-500/10 group-hover:border-emerald-500/40 group-hover:shadow-lg group-hover:shadow-emerald-500/10"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-neutral-800 border border-neutral-600/60 flex items-center justify-center transition-all group-hover:bg-emerald-500/10 group-hover:border-emerald-500/40 group-hover:shadow-lg group-hover:shadow-emerald-500/10"
                       whileHover={{ scale: 1.08 }}
                       transition={{ type: "spring", stiffness: 300, damping: 18 }}
                     >
@@ -2650,7 +2650,7 @@ export default function EntryDetailCard({ pawn, onClose, onRelease, onMarkActive
                       className="flex flex-col items-center gap-2 group outline-none"
                     >
                       <motion.div
-                        className="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-600/60 flex items-center justify-center transition-all group-hover:bg-red-500/10 group-hover:border-red-500/40 group-hover:shadow-lg group-hover:shadow-red-500/10"
+                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-neutral-800 border border-neutral-600/60 flex items-center justify-center transition-all group-hover:bg-red-500/10 group-hover:border-red-500/40 group-hover:shadow-lg group-hover:shadow-red-500/10"
                         whileHover={{ scale: 1.08 }}
                         transition={{ type: "spring", stiffness: 300, damping: 18 }}
                       >

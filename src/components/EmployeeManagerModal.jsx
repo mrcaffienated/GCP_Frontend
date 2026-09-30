@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, Plus, UserCheck, Eye, EyeOff, Loader2, CheckCircle2, XCircle, Clock } from "lucide-react";
 import { employeesApi } from "../services/api";
+import { useSwipeToDismiss } from "../hooks/useSwipeToDismiss";
 
 export default function EmployeeManagerModal({ onClose, onPendingCountChange, initialTab = "list" }) {
+  const { dragHandleProps, sheetProps } = useSwipeToDismiss(onClose);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
@@ -128,10 +131,11 @@ export default function EmployeeManagerModal({ onClose, onPendingCountChange, in
           exit={{ y: "100%", opacity: 0 }}
           transition={{ duration: 0.22 }}
           onClick={e => e.stopPropagation()}
+          {...sheetProps}
         >
           {/* Header */}
           <div className="bg-neutral-900 border-b border-neutral-800 px-5 sm:px-6 pt-4 sm:pt-6 pb-4 shrink-0">
-            <div className="flex justify-center pt-0 pb-2 sm:hidden">
+            <div className="flex justify-center pt-0 pb-2 sm:hidden touch-none cursor-grab active:cursor-grabbing" {...dragHandleProps}>
               <div className="w-10 h-1 rounded-full bg-neutral-700" />
             </div>
             <div className="flex items-center gap-3 mb-4">

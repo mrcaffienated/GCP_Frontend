@@ -4,6 +4,7 @@ import {
   X, TrendingUp, TrendingDown, IndianRupee,
   BarChart2, ChevronDown, Hash, Calendar, CheckCircle2,
 } from "lucide-react";
+import { useSwipeToDismiss } from "../hooks/useSwipeToDismiss";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 function toDisplay(iso) {
@@ -380,6 +381,7 @@ function SeriesLineChart({ data, onPointClick }) {
 // ── Main Component ────────────────────────────────────────────────────────────
 export default function ReportsModal({ pawns, loading = false, isBoss, bossStats, onClose, onSeriesClick }) {
   useLockBodyScroll();
+  const { dragHandleProps, sheetProps } = useSwipeToDismiss(onClose);
 
   // Cancelled bills stay in record COUNTS (entries), but their loan amount and
   // interest are excluded from every ₹ total (interest is waived on cancellation).
@@ -501,9 +503,10 @@ export default function ReportsModal({ pawns, loading = false, isBoss, bossStats
         initial={{ y: "100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: "100%", opacity: 0 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
+        {...sheetProps}
       >
         {/* Mobile drag handle */}
-        <div className="flex justify-center pt-3 pb-1 sm:hidden shrink-0">
+        <div className="flex justify-center pt-3 pb-1 sm:hidden shrink-0 touch-none cursor-grab active:cursor-grabbing" {...dragHandleProps}>
           <div className="w-10 h-1 rounded-full bg-neutral-700" />
         </div>
 
