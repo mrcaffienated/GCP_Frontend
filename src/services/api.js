@@ -4,7 +4,7 @@ import * as mock from "./mockApi";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 
-const BACKEND_URL = "http://localhost:8080";
+const BACKEND_URL = "https://gcp-backend-exdy.onrender.com";
 
 const api = axios.create({ baseURL: `${BACKEND_URL}/api` });
 
